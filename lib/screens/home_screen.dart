@@ -119,9 +119,19 @@ class _FreepikWatermarkRemoverState extends State<FreepikWatermarkRemover> {
 
   showImage(show) {
     if (show == false) {
-      return null;
+      return const Text(
+          'You can get the Image URL by right clicking on the image in freepik and copying the image URL');
     } else {
-      return Image.network(url);
+      return Column(
+        children: [
+          Image.network(url),
+          const SizedBox(
+            height: 25,
+          ),
+          const Text(
+              'You can download the image by right clicking on the iamge and click on Save.')
+        ],
+      );
     }
   }
 }
