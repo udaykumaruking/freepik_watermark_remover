@@ -73,7 +73,7 @@ class _FreepikWatermarkRemoverState extends State<FreepikWatermarkRemover> {
               ElevatedButton.icon(
                   // labelText: 'Downalod',
                   label: const Text(
-                    'Download',
+                    'Remove Watermark',
                     style: TextStyle(fontSize: 18),
                   ),
                   icon: const Icon(
