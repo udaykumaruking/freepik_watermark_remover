@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../constants.dart';
 
@@ -67,6 +68,13 @@ class _FreepikWatermarkRemoverState extends State<FreepikWatermarkRemover> {
               const SizedBox(
                 height: 20,
               ),
+              const Text(
+                'You can get the Image URL by right clicking on the image in freepik and copying the image URL \n After Hitting Remove Watermark \n You can download the image by right clicking on the image and click on Save.',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               ElevatedButton.icon(
                   // labelText: 'Downalod',
                   label: const Text(
@@ -77,6 +85,7 @@ class _FreepikWatermarkRemoverState extends State<FreepikWatermarkRemover> {
                     Icons.download,
                     size: 20,
                   ),
+
                   // icon: FaIcon(FontAwesomeIcons.paypal),
                   style: ElevatedButton.styleFrom(
                       primary: Colors.blue[600],
@@ -87,18 +96,18 @@ class _FreepikWatermarkRemoverState extends State<FreepikWatermarkRemover> {
                     if (url != "") {
                       setState(() {
                         show = true;
+                        _launchURL();
                       });
                     }
                     nameController.clear();
                     // ignore: avoid_print
-                    print(url);
                   }),
               const SizedBox(
                 height: 50,
               ),
               Container(
-                child: showImage(show),
-              )
+                  // child: showImage(show),
+                  )
             ],
           ),
         ),
@@ -117,21 +126,23 @@ class _FreepikWatermarkRemoverState extends State<FreepikWatermarkRemover> {
     );
   }
 
-  showImage(show) {
-    if (show == false) {
-      return const Text(
-          'You can get the Image URL by right clicking on the image in freepik and copying the image URL');
-    } else {
-      return Column(
-        children: [
-          Image.network(url),
-          const SizedBox(
-            height: 25,
-          ),
-          const Text(
-              'You can download the image by right clicking on the iamge and click on Save.')
-        ],
-      );
-    }
-  }
+  // showImage(show) {
+  //   if (show == true) {
+  //     return Column(
+  //       children: [
+  //         Image.network(url),
+  //         const SizedBox(
+  //           height: 25,
+  //         ),
+  //       ],
+  //     );
+  //   }
+  // }
+
+  void _launchURL() async => {
+        await canLaunch(url)
+            ? await launch(url)
+            : throw 'Could not launch $url',
+        url = "",
+      };
 }
