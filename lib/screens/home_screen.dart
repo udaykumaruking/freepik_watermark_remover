@@ -61,9 +61,6 @@ class _FreepikWatermarkRemoverState extends State<FreepikWatermarkRemover> {
                 onChanged: (text) {
                   setState(() {
                     url = text;
-                    //you can access nameController in its scope to get
-                    // the value of text entered as shown below
-                    //UserName = nameController.text;
                   });
                 },
               ),
@@ -84,12 +81,14 @@ class _FreepikWatermarkRemoverState extends State<FreepikWatermarkRemover> {
                   style: ElevatedButton.styleFrom(
                       primary: Colors.blue[600],
                       padding: const EdgeInsets.all(20)),
-                  onPressed: () async {
+                  onPressed: () {
                     String abc = url.replaceFirst('a', '');
                     url = abc.replaceFirst('e', '');
-                    setState(() {
-                      show = true;
-                    });
+                    if (url != "") {
+                      setState(() {
+                        show = true;
+                      });
+                    }
                     nameController.clear();
                     // ignore: avoid_print
                     print(url);
@@ -104,6 +103,17 @@ class _FreepikWatermarkRemoverState extends State<FreepikWatermarkRemover> {
           ),
         ),
       ),
+      persistentFooterButtons: const [
+        Center(
+          child: Text(
+            'Developed By Uday Kumar Madarapu',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: kBlue,
+            ),
+          ),
+        )
+      ],
     );
   }
 
